@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Storage</title>
+</head>
+<body>
+    <h1>Test Your Storage</h1>
+    <button onclick="test()">Click Me to Test!</button>
+    <p id="result"></p>
+
+    <!-- Put script HERE at the bottom -->
+    <script src="storage.js"></script>
+    
+    <script>
+        // THIS LOADS DATA AUTOMATICALLY when page opens
+        loadEverything();
+        
+        function test() {
+            let bugs = getBugs();
+            document.getElementById('result').innerHTML = "It works! You have " + bugs.length + " bugs in storage.";
+        }
+    </script>
+</body>
+</html>
