@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bug Tracker</title>
+  </head>
+
+  <body>
+    <h3>Create Issue</h3>
+
+    <h3>All Issues</h3>
+    <ul id="issueList"></ul>
+
+    <input id="summary" placeholder="Summary" />
+    <textarea id="description" placeholder="Description"></textarea>
+
+    <select id="personDropdown"></select>
+    <select id="projectDropdown"></select>
+
+    <button onclick="createIssue()">Create Issue</button>
+
+    <!-- People Section -->
+    <h2>Add Person</h2>
+    <input id="name" placeholder="Name" />
+    <input id="surname" placeholder="Surname" />
+    <input id="email" placeholder="Email" />
+    <input id="username" placeholder="Username" />
+    <button onclick="createPerson()">Add Person</button>
+
+    <h3>People List</h3>
+    <ul id="peopleList"></ul>
+
+    <!-- Project Section -->
+    <h2>Add Project</h2>
+    <input id="projectName" placeholder="Project Name" />
+    <button onclick="createProject()">Add Project</button>
+
+    <h3>Project List</h3>
+    <ul id="projectList"></ul>
+
+    <script src="storage.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
