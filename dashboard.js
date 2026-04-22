@@ -128,14 +128,14 @@ function viewIssue(id){
 
     //  STEP 4:to fill the details cards with all bug info and a BACK TO DASHBOARD Button that returns to dashboard view & a delete button
     document.getElementById('details-card').innerHTML = `
-        <h2>Bug Details:</h2>
-        <h3>(${bug.id}). ${bug.summary}</h3>
+        <h2 class="mb-3">Bug Details:</h2>
+        <h3 class="mb-3">(${bug.id}). ${bug.summary}</h3>
         <p><strong>Description: </strong>${bug.description}</p>
         <p><strong>Status: </strong>${bug.status}</p>
         
-        <p>
+        <p class="mb-3">
         <strong>Status:</strong>
-        <select onchange="changeStatus('${bug.id}', this.value)">
+        <select class="form-select w-auto mt-1"onchange="changeStatus('${bug.id}', this.value)">
             <option value="open" ${bug.status === "open" ? "selected" : ""}>Open</option>
             <option value="resolved" ${bug.status === "resolved" ? "selected" : ""}>Resolved</option>
             <option value="overdue" ${bug.status === "overdue" ? "selected" : ""}>Overdue</option>
@@ -144,9 +144,9 @@ function viewIssue(id){
 
         <p><strong>Project: </strong>${allProjects.find(p => p.id === bug.projectId)?.name ||'Unknown'}</p>
 
-        <p>
+        <p class="mb-3">
         <strong>Assigned To:</strong>
-        <select onchange="reassignPerson('${bug.id}', this.value)">
+        <select class="form-select w-auto mt-1" onchange="reassignPerson('${bug.id}', this.value)">
             ${getPeople().map(person => `
             <option value="${person.id}" 
                 ${person.id === bug.assignedPersonId ? "selected" : ""}>
@@ -156,19 +156,20 @@ function viewIssue(id){
         </select>
         </p>
         
-        <p>
+        <p class="mb-4">
         <strong>Target Date:</strong>
-        <input 
+        <input  
+            class= "form-control w-auto mt-1"
             type="date" 
             value="${bug.targetDate}" 
             onchange="updateDate('${bug.id}', this.value)">
         </p>
         <br>
         
-        <button onclick="deleteIssue('${bug.id}')">Delete Issue</button>
+        <button class="btn btn-outline-danger" onclick="deleteIssue('${bug.id}')">Delete Issue</button>
         
         
-        <button type="button" onclick="showDashboard()">
+        <button class="btn btn-outline-primary btn-sm" type="button" onclick="showDashboard()">
          &larr; Back to Dashboard
         </button>
     `;
