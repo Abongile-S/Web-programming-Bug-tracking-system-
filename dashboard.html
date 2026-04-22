@@ -1,98 +1,122 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bug Tracker | Dashboard</title>
-</head>
-<body>
-  <!--==================================================================-->
-  <!--                            HEADER                                -->
-  <!--==================================================================-->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bug Tracker | Dashboard</title>
+  </head>
+  <body>
+    <!--==================================================================-->
+    <!--                            HEADER                                -->
+    <!--==================================================================-->
 
-   <header class="navbar">
+    <header class="navbar">
       <h1>Bug Tracking Dashboard</h1>
-   </header>
+    </header>
 
-  <!--==================================================================-->
-  <!--                     MAIN CONTENT                 -->
-  <!--==================================================================-->
- 
-  <main class="container">
-    <!--================================================= DASHBOARD AREA============================ -->
-    <section id="dashboard-area">
-      <h2>Bug Summary</h2>
+    <!--==================================================================-->
+    <!--                     MAIN CONTENT                 -->
+    <!--==================================================================-->
+
+    <main class="container">
+      <!--================================================= DASHBOARD AREA============================ -->
+      <section id="dashboard-area">
+        <h2>Bug Summary</h2>
 
         <!-- Button to open the Create Issue form -->
         <button onclick="showCreateIssue()">Create Issue</button>
 
         <!--Stats cards to be put here and count/Update using javaScript-->
         <section class="stats-rows">
-
           <article class="card">
             <h3>Total Bugs</h3>
             <p id="total-bugs">0</p>
           </article>
 
-           <article class="card">
+          <article class="card">
             <h3>Open Bugs</h3>
             <p id="open-bugs">0</p>
           </article>
 
-           <article class="card">
+          <article class="card">
             <h3>Resolved Bugs</h3>
             <p id="resolved-bugs">0</p>
           </article>
 
-           <article class="card">
+          <article class="card">
             <h3>Overdue Bugs</h3>
             <p id="overdue-bugs">0</p>
           </article>
         </section>
 
-      <!--==================================FILTERING CONTROLS/DROPDOWNS==========================-->
-      <!--FILTER BAR- users search and filter the bugs lists-->
+        <!--==================================FILTERING CONTROLS/DROPDOWNS==========================-->
+        <!--FILTER BAR- users search and filter the bugs lists-->
         <h2>Filters</h2>
-      <!--to group all filter related controls and labels + accessibilty-->
-      <fieldset> 
-        <legend class="filter">Filter Issues:</legend>
-        
-        <input type="search" id="search-input" placeholder="Type to search system..." oninput="provideTable()">
+        <!--to group all filter related controls and labels + accessibilty-->
+        <fieldset>
+          <legend class="filter">Filter Issues:</legend>
 
-        <!--Dropdown to filter issues by statuses-->
-        <select id="filter-status" class="form-selection" style="width: auto;" onchange="provideTable()" >
-          <option value="">All Statuses</option>
-          <option value="open">Open</option>
-          <option value="resolved">Resolved</option>
-          <option value="overdue">Overdue</option>
-        </select>
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Type to search system..."
+            oninput="provideTable()"
+          />
 
-        <!--Dropdown to filter by priority-->
-        <select id="filter-priority" class="form-selection" style="width: auto;" onchange="provideTable()">
-          <option value="">All Priorities</option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-        </select>
+          <!--Dropdown to filter issues by statuses-->
+          <select
+            id="filter-status"
+            class="form-selection"
+            style="width: auto"
+            onchange="provideTable()"
+          >
+            <option value="">All Statuses</option>
+            <option value="open">Open</option>
+            <option value="resolved">Resolved</option>
+            <option value="overdue">Overdue</option>
+          </select>
 
-        <!--Dropdown to filter by project-->
-        <select id="filter-project" style="width: auto" onchange="provideTable()">
-          <option value="">All Projects</option>
-        </select>
+          <!--Dropdown to filter by priority-->
+          <select
+            id="filter-priority"
+            class="form-selection"
+            style="width: auto"
+            onchange="provideTable()"
+          >
+            <option value="">All Priorities</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
 
-        <!--Button to reset all the filters-->
-        <button class="btn-resetFilters" onclick="resetFilters()">Reset Filters</button>
-      </fieldset>
+          <!--Dropdown to filter by project-->
+          <select
+            id="filter-project"
+            style="width: auto"
+            onchange="provideTable()"
+          >
+            <option value="">All Projects</option>
+          </select>
 
-      <h2>All Issues</h2>
+          <!--Button to reset all the filters-->
+          <button class="btn-resetFilters" onclick="resetFilters()">
+            Reset Filters
+          </button>
+        </fieldset>
+
+        <h2>All Issues</h2>
         <p class="instructions">
-          <i>To view full details of an issue, click on the issue for more details.</i>
+          <i
+            >To view full details of an issue, click on the issue for more
+            details.</i
+          >
         </p>
 
         <!--===================================ISSUES TABLE==============================================-->
         <!--Table showing main list of all bugs-->
         <table class="table">
-          <thead> <!--<THEAD> TO GROUP THE TABLE HEADER ROW-->
+          <thead>
+            <!--<THEAD> TO GROUP THE TABLE HEADER ROW-->
             <tr>
               <!--scope= col  tell us well mainly screen readers that this is a column.(accessibility)-->
               <th scope="col">Issue #</th>
@@ -105,94 +129,109 @@
             </tr>
           </thead>
 
-          <tbody id="issues-tbody"> </tbody>  <!--table body to store all the issue -->
+          <tbody id="issues-tbody"></tbody>
+          <!--table body to store all the issue -->
         </table>
-      
-      <p id="result-counter"></p>  <!--Counts the issues accordingly(based on the selected filters)-->
-    </section>
 
-  <!--=============================ISUUES CARD SECTION================================================ -->
-    <!-- , HIDDEN BY DEFAULT AND THEN WHEN WE CLICK AN ISSUE/ ROW , WE REVEAL IT BY REMOVING THE CLASS -->
+        <p id="result-counter"></p>
+        <!--Counts the issues accordingly(based on the selected filters)-->
+      </section>
 
-    <section id="details-section" class="no-display" style="display: none;">
+      <!--=============================ISUUES CARD SECTION================================================ -->
+      <!-- , HIDDEN BY DEFAULT AND THEN WHEN WE CLICK AN ISSUE/ ROW , WE REVEAL IT BY REMOVING THE CLASS -->
 
-  <!--Issue details to be inserted here as cards by js-->
-      <article id="details-card"> </article>
-    </section>
+      <section id="details-section" class="no-display" style="display: none">
+        <!--Issue details to be inserted here as cards by js-->
+        <article id="details-card"></article>
+      </section>
 
+      <!--==============Issue creation area==============-->
+      <!-- This section appears when user clicks "Create Issue" -->
+      <section id="create-issue-section" style="display: none">
+        <form id="issueForm">
+          <fieldset>
+            <legend>Issue Creation</legend>
 
-    <!--==============Issue creation area==============-->
-    <!-- This section appears when user clicks "Create Issue" -->
-        <section id="create-issue-section" style="display:none;">
-          <form id="issueForm">
-            
-            <fieldset>
+            <!-- Summary input -->
+            <label for="issue-summary">Summary</label>
+            <input type="text" id="issue-summary" placeholder="Summary" />
 
-              <legend>Issue Creation</legend>
+            <br /><br />
 
-              <!-- Summary input -->
-              <label for="issue-summary">Summary</label>
-              <input type="text" id="issue-summary" placeholder="Summary">
+            <!-- Description input -->
+            <label for="issue-description">Description</label>
+            <textarea
+              id="issue-description"
+              placeholder="Description"
+            ></textarea>
 
-              <br><br>
+            <br /><br />
 
-              <!-- Description input -->
-              <label for="issue-description">Description</label>
-              <textarea id="issue-description" placeholder="Description"></textarea>
+            <!-- Priority dropdown -->
+            <label for="issue-priority">Priority</label>
+            <select id="issue-priority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
 
-              <br><br>
+            <br /><br />
 
-              <!-- Priority dropdown -->
-              <label for="issue-priority">Priority</label>
-              <select id="issue-priority">
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
+            <!-- Project dropdown (populated using JavaScript) -->
+            <label for="issue-project">Choose Project</label>
+            <select id="issue-project"></select>
 
-              <br><br>
+            <br /><br />
 
-              <!-- Project dropdown (populated using JavaScript) -->
-              <label for="issue-project">Choose Project</label>
-              <select id="issue-project"></select>
+            <!-- Assign person dropdown (populated using JavaScript) -->
+            <label for="issue-assigned">Assign Person</label>
+            <select id="issue-assigned">
+              <option value="">Unassigned</option>
+            </select>
 
-              <br><br>
+            <br /><br />
 
-              <!-- Assign person dropdown (populated using JavaScript) -->
-              <label for="issue-assigned">Assign Person</label>
-              <select id="issue-assigned">
-                <option value="">Unassigned</option>
-              </select>
+            <!-- Target date -->
+            <label for="issue-date">Date</label>
+            <input type="date" id="issue-date" />
+          </fieldset>
 
-              <br><br>
+          <!-- Create issue button -->
+          <button onclick="createIssue()">Create Issue</button>
 
-              <!-- Target date -->
-              <label for="issue-date">Date</label>
-              <input type="date" id="issue-date">
+          <!-- Cancel button returns user to dashboard -->
+          <button onclick="showDashboard()">Cancel</button>
+        </form>
+      </section>
+    </main>
+    <!-- ==============================================FOOTER SECTION=================================-->
+    <footer class="footer-text">
+      <!-- <small>Bug Tracker Sytem</small> -->
+    </footer>
 
-            </fieldset>
+    <!-- ================================================LINKING SCRIPT FILES    =====================-->
+    <script src="storage.js"></script>
+    <script src="dashboard.js"></script>
 
-            <!-- Create issue button -->
-           <button onclick="createIssue()">Create Issue</button>
+    <h2>Add Person</h2>
+    <input id="name" placeholder="Name" />
+    <input id="surname" placeholder="Surname" />
+    <input id="email" placeholder="Email" />
+    <input id="username" placeholder="Username" />
+    <button onclick="createPerson()">Add Person</button>
 
-            <!-- Cancel button returns user to dashboard -->
-           <button onclick="showDashboard()">Cancel</button>
+    <h3>People List</h3>
+    <ul id="peopleList"></ul>
 
-          </form>
-          
-        </section>
-        
-  </main>
-  <!-- ==============================================FOOTER SECTION=================================-->
-  <footer class="footer-text">
-    <!-- <small>Bug Tracker Sytem</small> -->
-  </footer>
+    <!-- Project Section -->
+    <h2>Add Project</h2>
+    <input id="projectName" placeholder="Project Name" />
+    <button onclick="createProject()">Add Project</button>
 
-  <!-- ================================================LINKING SCRIPT FILES    =====================-->
-   <script src="storage.js"></script>
-   <script src="dashboard.js"></script>
-  
-</body>
+    <h3>Project List</h3>
+    <ul id="projectList"></ul>
 
-</body>
+    <script src="storage.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>
