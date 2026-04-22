@@ -174,6 +174,7 @@ function showDashboard(){
     
     //hide details and show dashboard
     document.getElementById('details-section').style.display = 'none';
+    document.getElementById('create-issue-section').style.display = 'none';
     document.getElementById('dashboard-area').style.display = 'block';
 
     //clear the details card content and hide back to dashboard button as well 
@@ -185,10 +186,10 @@ function showDashboard(){
 }
 
 // Shows the create issue section and hides dashboard
-function showCreateIssue(){
-    document.getElementById('dashboard-area').style.display = 'none';
-    document.getElementById('create-issue-section').style.display = 'block';
-}
+//function showCreateIssue(){
+  //  document.getElementById('dashboard-area').style.display = 'none';
+  //  document.getElementById('create-issue-section').style.display = 'block';
+//}
 
 
 
@@ -227,7 +228,6 @@ function deleteIssue(id){
     if(confirm("Are you sure you want to delete this issue?")){
 
         deleteBug(id);
-
         showDashboard();
         countStats();
         provideTable();
@@ -269,9 +269,8 @@ function createIssue(){
     document.getElementById('issue-assigned').value = "";
     document.getElementById('issue-date').value = "";
 
-    // Hide form + show dashboard
-    document.getElementById('create-issue-section').style.display = 'none';
-    document.getElementById('dashboard-area').style.display = 'block';
+    
+    showDashboard();
 
     // Refresh dashboard data
     countStats();
