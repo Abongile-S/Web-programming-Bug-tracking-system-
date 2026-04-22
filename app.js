@@ -78,22 +78,7 @@ function populateDropdowns() {
   });
 }
 
-function createIssue() {
-  let bug = {
-    summary: document.getElementById("summary").value,
-    description: document.getElementById("description").value,
-    assignedPersonId: document.getElementById("personDropdown").value,
-    projectId: document.getElementById("projectDropdown").value,
-    priority: "medium",
-    status: "open",
-    targetDate: "",
-    actualDate: "",
-    resolution: "",
-  };
 
-  addBug(bug);
-  alert("Issue created!");
-}
 
 function displayIssues() {
   let bugs = getBugs();
