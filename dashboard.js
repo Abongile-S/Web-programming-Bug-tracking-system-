@@ -1,6 +1,8 @@
 //initial load
 loadEverything();
 populateProjectFilter();
+populatePeopleDropdown(); // NEW
+populateProjectDropdown(); // NEW
 countStats();
 provideTable();
 
@@ -124,17 +126,45 @@ function viewIssue(id){
     document.getElementById('dashboard-area').style.display = 'none';
     document.getElementById('details-section').style.display = 'block';
 
-    //  STEP 4:to fill the details cards with all bug info and  a BACK TO DASHBOARD Button that returns to dashboard view
+//<p><strong>Priority: </strong>${bug.priority}</p>
+//<p><strong>Assigned To: </strong>${allPeople.find(p =>p.id === bug.assignedPersonId)?.name||'Unassigned'}</p>
+
+
+    //  STEP 4:to fill the details cards with all bug info and a BACK TO DASHBOARD Button that returns to dashboard view & a delete button
     document.getElementById('details-card').innerHTML = `
         <h2>Bug Details:</h2>
         <h3>(${bug.id}). ${bug.summary}</h3>
         <p><strong>Description: </strong>${bug.description}</p>
         <p><strong>Status: </strong>${bug.status}</p>
-        <p><strong>Priority: </strong>${bug.priority}</p>
+        
+        <p>
+        <strong>Status:</strong>
+        <select onchange="changeStatus('${bug.id}', this.value)">
+            <option value="open" ${bug.status === "open" ? "selected" : ""}>Open</option>
+            <option value="resolved" ${bug.status === "resolved" ? "selected" : ""}>Resolved</option>
+            <option value="overdue" ${bug.status === "overdue" ? "selected" : ""}>Overdue</option>
+        </select>
+        </p>
+
         <p><strong>Project: </strong>${allProjects.find(p => p.id === bug.projectId)?.name ||'Unknown'}</p>
-        <p><strong>Assigned To: </strong>${allPeople.find(p =>p.id === bug.assignedPersonId)?.name||'Unassigned'}</p>
+
+        <p>
+        <strong>Assigned To:</strong>
+        <select onchange="reassignPerson('${bug.id}', this.value)">
+            ${getPeople().map(person => `
+            <option value="${person.id}" 
+                ${person.id === bug.assignedPersonId ? "selected" : ""}>
+                ${person.name} ${person.surname}
+            </option>
+            `).join("")}
+        </select>
+        </p>
+        
         <p><strong>Target Date: </strong>${bug.targetDate}</p>
         <br>
+        
+        <button onclick="deleteIssue('${bug.id}')">Delete Issue</button>
+        
         
         <button type="button" onclick="showDashboard()">
          &larr; Back to Dashboard
@@ -158,12 +188,142 @@ function showDashboard(){
 
 }
 
+// Shows the create issue section and hides dashboard
+function showCreateIssue(){
+    document.getElementById('dashboard-area').style.display = 'none';
+    document.getElementById('create-issue-section').style.display = 'block';
+}
+
+
+
 //===========================================================================================
 //          Page run order
 //=============================================================================================
 
+
+// Updates only the status of an issue
+function changeStatus(id, newStatus){
+
+    updateBug(id, {
+        status: newStatus
+    });
+
+    // refresh UI so dashboard updates immediately
+    countStats();
+    provideTable();
+}
+
+// Changes who the issue is assigned to
+function reassignPerson(id, personId){
+
+    updateBug(id, {
+        assignedPersonId: personId
+    });
+
+    // optional refresh for table consistency
+    provideTable();
+}
+
+
+// Deletes an issue
+function deleteIssue(id){
+
+    if(confirm("Are you sure you want to delete this issue?")){
+
+        deleteBug(id);
+
+        showDashboard();
+        countStats();
+        provideTable();
+
+    }
+}
+
+
+
+// Shows create issue form
+function showCreateIssue(){
+    document.getElementById('dashboard-area').style.display = 'none';
+    document.getElementById('create-issue-section').style.display = 'block';
+}
+
+// Creates new issue
+function createIssue(){
+
+    let issue = {
+        summary: document.getElementById('issue-summary').value,
+        description: document.getElementById('issue-description').value,
+        priority: document.getElementById('issue-priority').value,
+        projectId: document.getElementById('issue-project').value,
+        assignedPersonId: document.getElementById('issue-assigned').value,
+        targetDate: document.getElementById('issue-date').value,
+        status: "open",
+        actualDate: "",
+        resolution: ""
+    };
+
+    //save issue
+    addBug(issue);
+
+    // Reset form fields 
+    document.getElementById('issue-summary').value = "";
+    document.getElementById('issue-description').value = "";
+    document.getElementById('issue-priority').value = "low";
+    document.getElementById('issue-project').value = "";
+    document.getElementById('issue-assigned').value = "";
+    document.getElementById('issue-date').value = "";
+
+    // Hide form + show dashboard
+    document.getElementById('create-issue-section').style.display = 'none';
+    document.getElementById('dashboard-area').style.display = 'block';
+
+    // Refresh dashboard data
+    countStats();
+    provideTable();
+}
+
+// Populate people dropdown
+function populatePeopleDropdown(){
+
+let select = document.getElementById('issue-assigned');
+
+allPeople.forEach(person => {
+
+let option = document.createElement('option');
+
+option.value = person.id;
+option.textContent = person.name + " " + person.surname;
+
+select.appendChild(option);
+
+});
+}
+
+// Populate project dropdown
+function populateProjectDropdown(){
+
+let select = document.getElementById('issue-project');
+
+allProjects.forEach(project => {
+
+let option = document.createElement('option');
+
+option.value = project.id;
+option.textContent = project.name;
+
+select.appendChild(option);
+
+});
+}
+
+
 window.viewIssue = viewIssue;
 window.showDashboard = showDashboard;
+window.showCreateIssue = showCreateIssue;
+window.createIssue = createIssue;
+window.deleteIssue = deleteIssue;
+window.changeStatus = changeStatus;
+window.reassignPerson = reassignPerson;
 
 
 
