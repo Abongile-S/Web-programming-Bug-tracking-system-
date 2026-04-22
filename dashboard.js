@@ -156,7 +156,13 @@ function viewIssue(id){
         </select>
         </p>
         
-        <p><strong>Target Date: </strong>${bug.targetDate}</p>
+        <p>
+        <strong>Target Date:</strong>
+        <input 
+            type="date" 
+            value="${bug.targetDate}" 
+            onchange="updateDate('${bug.id}', this.value)">
+        </p>
         <br>
         
         <button onclick="deleteIssue('${bug.id}')">Delete Issue</button>
@@ -168,6 +174,7 @@ function viewIssue(id){
     `;
     
 }
+
 
 //shows the dashboard by hiding the details section and claering the details card, called when user clicks 'Back to Dashboard' button
 function showDashboard(){
@@ -258,21 +265,21 @@ function createIssue(){
         resolution: ""
     };
 
+    //overdue date check
+    let today = new Date().toISOString().split("T")[0];
+
+    if (issue.targetDate < today) {
+        issue.status = "overdue";
+    }
+
     //save issue
     addBug(issue);
 
     // Reset form fields 
-    document.getElementById('issue-summary').value = "";
-    document.getElementById('issue-description').value = "";
-    document.getElementById('issue-priority').value = "low";
-    document.getElementById('issue-project').value = "";
-    document.getElementById('issue-assigned').value = "";
-    document.getElementById('issue-date').value = "";
-
-    
-    showDashboard();
+    document.getElementById("issueForm").reset();
 
     // Refresh dashboard data
+    showDashboard();
     countStats();
     provideTable();
 }
