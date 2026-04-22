@@ -23,7 +23,10 @@
     <section id="dashboard-area">
       <h2>Bug Summary</h2>
 
-      <!--Stats cards to be put here and count/Update using javaScript-->
+        <!-- Button to open the Create Issue form -->
+        <button onclick="showCreateIssue()">Create Issue</button>
+
+        <!--Stats cards to be put here and count/Update using javaScript-->
         <section class="stats-rows">
 
           <article class="card">
@@ -116,6 +119,46 @@
   <!--Issue details to be inserted here as cards by js-->
       <article id="details-card"> </article>
     </section>
+
+
+    <!--==============Issue creation are==============-->
+    <!-- This section appears when user clicks "Create Issue" -->
+        <section id="create-issue-section" style="display:none;">
+
+          <h2>Create Issue</h2>
+
+          <!-- Summary input -->
+          <input type="text" id="issue-summary" placeholder="Summary">
+
+          <!-- Description input -->
+          <textarea id="issue-description" placeholder="Description"></textarea>
+
+          <!-- Priority dropdown -->
+          <select id="issue-priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+
+          <!-- Project dropdown (populated using JavaScript) -->
+          <select id="issue-project"></select>
+
+          <!-- Assign person dropdown (populated using JavaScript) -->
+          <select id="issue-assigned">
+            <option value="">Unassigned</option>
+          </select>
+
+          <!-- Target date -->
+          <input type="date" id="issue-date">
+
+          <!-- Create issue button -->
+          <button onclick="createIssue()">Create Issue</button>
+
+          <!-- Cancel button returns user to dashboard -->
+          <button onclick="showDashboard()">Cancel</button>
+
+        </section>
+        
   </main>
   <!-- ==============================================FOOTER SECTION=================================-->
   <footer class="footer-text">
