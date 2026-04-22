@@ -121,50 +121,64 @@
     </section>
 
 
-    <!--==============Issue creation are==============-->
+    <!--==============Issue creation area==============-->
     <!-- This section appears when user clicks "Create Issue" -->
         <section id="create-issue-section" style="display:none;">
-          <fieldset>
+          <form id="issueForm">
+            
+            <fieldset>
 
-            <legend>Issue Creation</legend>
+              <legend>Issue Creation</legend>
 
-            <!-- Summary input -->
-            <label for="issue-summary"></label>
-            <input type="text" id="issue-summary" placeholder="Summary">
+              <!-- Summary input -->
+              <label for="issue-summary">Summary</label>
+              <input type="text" id="issue-summary" placeholder="Summary">
 
-            <!-- Description input -->
-            <label for="issue-description">Description</label>
-            <textarea id="issue-description" placeholder="Description"></textarea>
+              <br><br>
 
-            <!-- Priority dropdown -->
-            <label for="issue-priority">Priority</label>
-            <select id="issue-priority">
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-            </select>
+              <!-- Description input -->
+              <label for="issue-description">Description</label>
+              <textarea id="issue-description" placeholder="Description"></textarea>
 
-            <!-- Project dropdown (populated using JavaScript) -->
-            <label for="issue-project"></label>
-            <select id="issue-project"></select>
+              <br><br>
 
-            <!-- Assign person dropdown (populated using JavaScript) -->
-            <label for="issue-assigned"></label>
-            <select id="issue-assigned">
-              <option value="">Unassigned</option>
-            </select>
+              <!-- Priority dropdown -->
+              <label for="issue-priority">Priority</label>
+              <select id="issue-priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+              </select>
 
-            <!-- Target date -->
-            <label for="date"></label>
-            <input type="date" id="issue-date">
+              <br><br>
 
-          </fieldset>
+              <!-- Project dropdown (populated using JavaScript) -->
+              <label for="issue-project">Choose Project</label>
+              <select id="issue-project"></select>
+
+              <br><br>
+
+              <!-- Assign person dropdown (populated using JavaScript) -->
+              <label for="issue-assigned">Assign Person</label>
+              <select id="issue-assigned">
+                <option value="">Unassigned</option>
+              </select>
+
+              <br><br>
+
+              <!-- Target date -->
+              <label for="issue-date">Date</label>
+              <input type="date" id="issue-date">
+
+            </fieldset>
 
             <!-- Create issue button -->
            <button onclick="createIssue()">Create Issue</button>
 
             <!-- Cancel button returns user to dashboard -->
            <button onclick="showDashboard()">Cancel</button>
+
+          </form>
           
         </section>
         
