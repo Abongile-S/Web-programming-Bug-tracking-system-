@@ -126,10 +126,6 @@ function viewIssue(id){
     document.getElementById('dashboard-area').style.display = 'none';
     document.getElementById('details-section').style.display = 'block';
 
-//<p><strong>Priority: </strong>${bug.priority}</p>
-//<p><strong>Assigned To: </strong>${allPeople.find(p =>p.id === bug.assignedPersonId)?.name||'Unassigned'}</p>
-
-
     //  STEP 4:to fill the details cards with all bug info and a BACK TO DASHBOARD Button that returns to dashboard view & a delete button
     document.getElementById('details-card').innerHTML = `
         <h2>Bug Details:</h2>

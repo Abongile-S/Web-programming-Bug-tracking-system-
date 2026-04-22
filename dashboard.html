@@ -124,39 +124,48 @@
     <!--==============Issue creation are==============-->
     <!-- This section appears when user clicks "Create Issue" -->
         <section id="create-issue-section" style="display:none;">
+          <fieldset>
 
-          <h2>Create Issue</h2>
+            <legend>Issue Creation</legend>
 
-          <!-- Summary input -->
-          <input type="text" id="issue-summary" placeholder="Summary">
+            <!-- Summary input -->
+            <label for="issue-summary"></label>
+            <input type="text" id="issue-summary" placeholder="Summary">
 
-          <!-- Description input -->
-          <textarea id="issue-description" placeholder="Description"></textarea>
+            <!-- Description input -->
+            <label for="issue-description">Description</label>
+            <textarea id="issue-description" placeholder="Description"></textarea>
 
-          <!-- Priority dropdown -->
-          <select id="issue-priority">
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
+            <!-- Priority dropdown -->
+            <label for="issue-priority">Priority</label>
+            <select id="issue-priority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
 
-          <!-- Project dropdown (populated using JavaScript) -->
-          <select id="issue-project"></select>
+            <!-- Project dropdown (populated using JavaScript) -->
+            <label for="issue-project"></label>
+            <select id="issue-project"></select>
 
-          <!-- Assign person dropdown (populated using JavaScript) -->
-          <select id="issue-assigned">
-            <option value="">Unassigned</option>
-          </select>
+            <!-- Assign person dropdown (populated using JavaScript) -->
+            <label for="issue-assigned"></label>
+            <select id="issue-assigned">
+              <option value="">Unassigned</option>
+            </select>
 
-          <!-- Target date -->
-          <input type="date" id="issue-date">
+            <!-- Target date -->
+            <label for="date"></label>
+            <input type="date" id="issue-date">
 
-          <!-- Create issue button -->
-          <button onclick="createIssue()">Create Issue</button>
+          </fieldset>
 
-          <!-- Cancel button returns user to dashboard -->
-          <button onclick="showDashboard()">Cancel</button>
+            <!-- Create issue button -->
+           <button onclick="createIssue()">Create Issue</button>
 
+            <!-- Cancel button returns user to dashboard -->
+           <button onclick="showDashboard()">Cancel</button>
+          
         </section>
         
   </main>
